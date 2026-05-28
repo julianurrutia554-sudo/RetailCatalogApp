@@ -9,9 +9,13 @@ import FactoryKit
 
 extension Container {
     
-    // MARK: - Capa de Infraestructura (Instancias Únicas / Singletons)
+    // MARK: - Infraestructure
+    var apiClient: Factory<APIClientProtocol> {
+        self { APIClient() }.singleton
+    }
+    
     var dataTransferService: Factory<DataTransferServiceProtocol> {
-        self { DataTransferService() }.singleton
+        self { DataTransferService(apiClient: self.apiClient()) }.singleton
     }
     
     var coreDataStorage: Factory<CoreDataStorageProtocol> {
@@ -22,8 +26,7 @@ extension Container {
         self { KeychainStorage() }.singleton
     }
     
-    // MARK: - Capa de Datos (Data)
-    // El repositorio recibe la infraestructura de red y de persistencia local
+    // MARK: - Data
     var productsRepository: Factory<ProductsRepositoryProtocol> {
         self {
             DefaultProductsRepository(
@@ -33,12 +36,13 @@ extension Container {
         }
     }
     
-    // MARK: - Capa de Dominio (Domain)
+    // MARK: - Domain
     var fetchProductsUseCase: Factory<FetchProductsUseCase> {
         self { FetchProductsUseCase(repository: self.productsRepository()) }
     }
     
-    // MARK: - Capa de Presentación (Presentation)
+    // MARK: - Presentation
+    @MainActor
     var productListViewModel: Factory<ProductListViewModel> {
         self { ProductListViewModel(fetchProductsUseCase: self.fetchProductsUseCase()) }
     }

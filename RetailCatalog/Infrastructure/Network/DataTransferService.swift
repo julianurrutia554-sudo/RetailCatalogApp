@@ -19,25 +19,21 @@ protocol DataTransferServiceProtocol {
 }
 
 final class DataTransferService: DataTransferServiceProtocol {
-    private let session: URLSession
+
+    private let apiClient: APIClientProtocol
     
-    init(session: URLSession = .shared) {
-        self.session = session
+    init(apiClient: APIClientProtocol) {
+        self.apiClient = apiClient
     }
     
     func request<T: Decodable>(with urlString: String) async throws -> T {
-        guard let url = URL(string: urlString) else {
-            throw DataTransferError.badURL
-        }
+        guard let url = URL(string: urlString) else { throw DataTransferError.badURL }
+        
+        let request = URLRequest(url: url)
         
         do {
-            let (data, response) = try await session.data(from: url)
+            let (data, httpResponse) = try await apiClient.perform(request)
             
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw DataTransferError.noNetwork
-            }
-            
-            // Validación de códigos de estado HTTP
             switch httpResponse.statusCode {
             case 200...299:
                 do {
@@ -48,8 +44,6 @@ final class DataTransferService: DataTransferServiceProtocol {
             default:
                 throw DataTransferError.networkFailure(statusCode: httpResponse.statusCode)
             }
-        } catch let error as DataTransferError {
-            throw error
         } catch {
             throw DataTransferError.noNetwork
         }
