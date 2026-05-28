@@ -15,21 +15,24 @@ enum DataTransferError: Error {
 }
 
 protocol DataTransferServiceProtocol {
-    func request<T: Decodable>(with urlString: String) async throws -> T
+    func request<T: Decodable>(with endpoint: Endpoint) async throws -> T
 }
 
 final class DataTransferService: DataTransferServiceProtocol {
-
     private let apiClient: APIClientProtocol
+    private let baseUrl: String
     
-    init(apiClient: APIClientProtocol) {
+    // Inyectamos la URL base de manera centralizada (ideal para leerla de un archivo .xcconfig o Info.plist)
+    init(apiClient: APIClientProtocol, baseUrl: String = "https://api.myretail.com/") {
         self.apiClient = apiClient
+        self.baseUrl = baseUrl
     }
     
-    func request<T: Decodable>(with urlString: String) async throws -> T {
-        guard let url = URL(string: urlString) else { throw DataTransferError.badURL }
-        
-        let request = URLRequest(url: url)
+    func request<T: Decodable>(with endpoint: Endpoint) async throws -> T {
+        // Construimos el URLRequest delegando la responsabilidad al objeto Endpoint
+        guard let request = endpoint.urlRequest(with: baseUrl) else {
+            throw DataTransferError.badURL
+        }
         
         do {
             let (data, httpResponse) = try await apiClient.perform(request)
