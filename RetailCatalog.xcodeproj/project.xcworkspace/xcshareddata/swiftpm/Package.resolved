@@ -1,0 +1,24 @@
+{
+  "originHash" : "1359b57d8260b546bc55448920b8cd633fe18d415b1e346cee997ba0d9ef7bc6",
+  "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory.git",
+      "state" : {
+        "revision" : "b32dc7a813c2da6b3c3618df12534b1d85c6aa78",
+        "version" : "3.0.5"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "cf8be20d07654570554c8a8a4952bc8a5766a8b0",
+        "version" : "8.9.0"
+      }
+    }
+  ],
+  "version" : 3
+}

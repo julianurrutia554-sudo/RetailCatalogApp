@@ -208,6 +208,10 @@
 			);
 			mainGroup = EF4D3F042FC8CA20004B7E24;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF4D3F502FC8DB67004B7E24 /* XCRemoteSwiftPackageReference "Factory" */,
+				EF4D3F512FC8DB78004B7E24 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF4D3F0E2FC8CA20004B7E24 /* Products */;
 			projectDirPath = "";
@@ -563,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF4D3F502FC8DB67004B7E24 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.5;
+			};
+		};
+		EF4D3F512FC8DB78004B7E24 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = EF4D3F052FC8CA20004B7E24 /* Project object */;
 }
