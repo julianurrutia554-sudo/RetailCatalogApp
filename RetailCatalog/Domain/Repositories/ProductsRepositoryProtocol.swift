@@ -1,0 +1,10 @@
+//
+//  ProductsRepositoryProtocol.swift
+//  RetailCatalog
+//
+//  Created by Julian Urrutia on 28/05/26.
+//
+
+protocol ProductsRepositoryProtocol {
+    func getProducts() async throws -> [Product]
+}
