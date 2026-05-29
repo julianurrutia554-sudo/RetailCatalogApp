@@ -27,7 +27,6 @@ final class ProductListViewModel {
         do {
             let entities = try await fetchProductsUseCase.execute()
             
-            // Transformación: De Entity a UI Model
             let uiModels = entities.map { entity in
                 let priceDisplay = entity.price == 0 ? "Gratis" : String(format: "%.2f €", entity.price)
                 let badge = entity.id.contains("ZARA") ? "¡Tendencia!" : nil
