@@ -22,7 +22,6 @@ final class DataTransferService: DataTransferServiceProtocol {
     private let apiClient: APIClientProtocol
     private let baseUrl: String
     
-    // Inyectamos la URL base de manera centralizada (ideal para leerla de un archivo .xcconfig o Info.plist)
     init(apiClient: APIClientProtocol, baseUrl: String = "https://api.myretail.com/") {
         self.apiClient = apiClient
         self.baseUrl = baseUrl

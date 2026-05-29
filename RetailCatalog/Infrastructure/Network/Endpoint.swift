@@ -23,7 +23,6 @@ struct Endpoint {
         self.queryParameters = queryParameters
     }
     
-    // Método encargado de ensamblar la URL final inyectando la Base URL del entorno
     func urlRequest(with baseUrl: String) -> URLRequest? {
         guard let urlBase = URL(string: baseUrl) else { return nil }
         let urlFull = urlBase.appendingPathComponent(path)
