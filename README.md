@@ -1,4 +1,4 @@
-Template iOS App using Clean Architecture and MVVM
+Plantilla de aplicación iOS que utiliza arquitectura limpia y MVVM.
 
 El proyecto está dividido en capas concéntricas aisladas siguiendo las reglas de dependencia de **Clean Architecture**:
 
